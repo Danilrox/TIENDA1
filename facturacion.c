@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "facturacion.h"
-
+//hola 
 // Listas 
 char *productos[] = {
     "Blusa", "Pantalon", "Medias", "Chompa", "Chaqueta", "Short",
