@@ -5,9 +5,10 @@ int main() {
     int producto, cantidad;
     int productosComprados[MAX]; //Lista con los ndices de los productos comprados por el usuario
     int cantidades[MAX]; //Lista con la cantidad de cada producto 
-    int contador = 0; //Numero de prodtuctos que elige el clinete y se inicializa el contador en 0
+    int contador = 0; //controla cuántos productos hay y hasta dónde se recorren los arreglos y se inicializa en 0.
     char opcion; //Variable para verificar si el cliente quiere seguir comprando 
 
+    //Bucle infinito 
     while (1) {
 
         // Ciclo de agregar productos 
@@ -36,13 +37,17 @@ int main() {
         printf("s = continuar | n = pagar | r = reiniciar\n");
         scanf(" %c", &opcion);
 
+        //Control de la opcion del usuario
+
+        // si la opcion es 'n' se cierrra el bucle por el break
         if (opcion == 'n' || opcion == 'N') {
             gestionarPago(total); // Gestion del pago final
             break;
         }
 
+        // Si la opcion es 'r' se reinici la factura
         if (opcion == 'r' || opcion == 'R') {
-            contador = 0;
+            contador = 0; //Se reinicia el contador 
             printf("\nFactura reiniciada.\n");
         }
         // Si es 's', el ciclo continúa y se agregan más productos 

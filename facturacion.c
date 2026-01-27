@@ -12,6 +12,7 @@ float precios[] = {
     35.00, 15.00, 8.00, 9.00, 15.00, 8.00
 };
 
+//Muestra el catalogo de ropa 
 void mostrarCatalogo() {
     printf("\n===== CATALOGO DE ROPA =====\n");
     for (int i = 0; i < 12; i++) {
@@ -19,6 +20,7 @@ void mostrarCatalogo() {
     }
 }
 
+//Funcion para seleccionar el producto
 void seleccionarProducto(int *producto, int *cantidad) {
     do {
         printf("\nSeleccione el producto (1-12): ");
@@ -30,19 +32,23 @@ void seleccionarProducto(int *producto, int *cantidad) {
 }
 
 void agregarProducto(int productosComprados[], int cantidades[], int *contador, int producto, int cantidad) {
-    productosComprados[*contador] = producto - 1;
-    cantidades[*contador] = cantidad;
-    (*contador)++;
+    // se cambia el valor de la variable contador desde esta funcion.
+    productosComprados[*contador] = producto - 1; //Guarda el indice del producto en la posicion contador.
+    cantidades[*contador] = cantidad; // Guarda la cantidad correspondiente en la posicion contador.
+    (*contador)++; //Contador va a umentando una unidad cada q se llame a la funcion.
 }
 
+//Funcion para calcular el subtotal de todas las compras
 float calcularSubtotalTotal(int productosComprados[], int cantidades[], int contador) {
     float subtotal = 0;
+    //Se repite el bucle mientras hayan productos 
     for (int i = 0; i < contador; i++) {
         subtotal += precios[productosComprados[i]] * cantidades[i];
     }
     return subtotal;
 }
 
+//Funcion para calcular el IVA de todas las compras 
 float calcularIVA(float subtotal) {
     return subtotal * IVA;
 }
@@ -58,14 +64,15 @@ void imprimirDetalleCompra(int productosComprados[], int cantidades[], int conta
     printf("%-15s %-10s %-10s %-10s\n", "Producto", "Precio", "Cantidad", "Subtotal");
 
     for (int i = 0; i < contador; i++) {
-        int idx = productosComprados[i];
-        float sub = precios[idx] * cantidades[i];
+        int idx = productosComprados[i]; // indice que indica la posición de un producto en los arreglos
+        float sub = precios[idx] * cantidades[i]; //Precio subtotal del producto
 
         printf("%-15s $%-9.2f %-10d $%-9.2f\n",
-               productos[idx], precios[idx], cantidades[i], sub);
+               productos[idx], precios[idx], cantidades[i], sub); //Subtotal de cada producto
     }
 }
 
+//Funcion para imprimir la factura 
 void imprimirFactura(float subtotal, float iva, float descuento, float total) {
     printf("\n===== FACTURA FINAL =====\n");
     printf("Subtotal:   $%.2f\n", subtotal);
@@ -74,11 +81,13 @@ void imprimirFactura(float subtotal, float iva, float descuento, float total) {
     printf("TOTAL:      $%.2f\n", total);
 }
 
+//Gestion de pago final 
 void gestionarPago(float total) {
     float pago;
     printf("\nIngrese el valor de pago: ");
     scanf("%f", &pago);
 
+    //Controlo de pago 
     if (pago > total)
         printf("Vuelto: $%.2f\n", pago - total);
     else if (pago == total)
