@@ -14,10 +14,10 @@ extern float precios[]; // Declaracion externa del arreglo de precios
 void mostrarCatalogo();
 void seleccionarProducto(int *producto, int *cantidad);
 void agregarProducto(int productosComprados[], int cantidades[], int *contador, int producto, int cantidad);
-
+int calcularCantidadTotal(int cantidades[], int contador);
 float calcularSubtotalTotal(int productosComprados[], int cantidades[], int contador);
 float calcularIVA(float subtotal);
-float calcularDescuento(float subtotal);
+float calcularDescuento(int cantidadTotal, float subtotal);
 
 void imprimirDetalleCompra(int productosComprados[], int cantidades[], int contador);
 void imprimirFactura(float subtotal, float iva, float descuento, float total);

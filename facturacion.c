@@ -23,7 +23,7 @@ void mostrarCatalogo() {
 //Funcion para seleccionar el producto
 void seleccionarProducto(int *producto, int *cantidad) {
     do {
-        printf("\nSeleccione el producto (1-12): ");
+        printf("\nSeleccione el producto (1-12): ");        
         scanf("%d", producto);
     } while (*producto < 1 || *producto > 12);
 
@@ -36,6 +36,17 @@ void agregarProducto(int productosComprados[], int cantidades[], int *contador, 
     productosComprados[*contador] = producto - 1; //Guarda el indice del producto en la posicion contador.
     cantidades[*contador] = cantidad; // Guarda la cantidad correspondiente en la posicion contador.
     (*contador)++; //Contador va a umentando una unidad cada q se llame a la funcion.
+}
+
+// Funcion para calcular la cantidad total de productos
+int calcularCantidadTotal(int cantidades[], int contador) {
+    int cantidadTotal = 0;
+
+    for (int i = 0; i < contador; i++) {
+        cantidadTotal += cantidades[i];
+    }
+
+    return cantidadTotal;
 }
 
 //Funcion para calcular el subtotal de todas las compras
@@ -53,8 +64,8 @@ float calcularIVA(float subtotal) {
     return subtotal * IVA;
 }
 
-float calcularDescuento(float subtotal) {
-    if (subtotal >= 100)
+float calcularDescuento(int cantidadTotal, float subtotal) {
+    if (cantidadTotal >= 10)
         return subtotal * 0.10;
     return 0;
 }

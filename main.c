@@ -7,6 +7,7 @@ int main() {
     int cantidades[MAX]; //Lista con la cantidad de cada producto 
     int contador = 0; //controla cuántos productos hay y hasta dónde se recorren los arreglos y se inicializa en 0.
     char opcion; //Variable para verificar si el cliente quiere seguir comprando 
+    int cantidadTotal;
 
     //Bucle infinito 
     while (1) {
@@ -16,6 +17,8 @@ int main() {
             mostrarCatalogo();
             seleccionarProducto(&producto, &cantidad);
             agregarProducto(productosComprados, cantidades, &contador, producto, cantidad);
+            
+            calcularCantidadTotal(cantidades, contador);
 
             printf("\nDesea agregar otro producto? (s/n): ");
             scanf(" %c", &opcion);
@@ -25,7 +28,7 @@ int main() {
         // Calculos 
         float subtotal = calcularSubtotalTotal(productosComprados, cantidades, contador);
         float iva = calcularIVA(subtotal);
-        float descuento = calcularDescuento(subtotal);
+        float descuento = calcularDescuento(cantidadTotal, subtotal);
         float total = subtotal + iva - descuento;
 
         // Mostrar factura
@@ -47,7 +50,8 @@ int main() {
 
         // Si la opcion es 'r' se reinici la factura
         if (opcion == 'r' || opcion == 'R') {
-            contador = 0; //Se reinicia el contador 
+            contador = 0; //Se reinicia el contador
+            cantidadTotal = 0; 
             printf("\nFactura reiniciada.\n");
         }
         // Si es 's', el ciclo continúa y se agregan más productos 
